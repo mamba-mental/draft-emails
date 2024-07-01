@@ -17,7 +17,6 @@ def draft_email():
 def load_bank_contacts():
     data = request.get_json()
     file_path = data.get('filePath')
-    # Assuming the file is stored on the server
     if os.path.exists(file_path):
         with open(file_path, 'r') as file:
             contacts = json.load(file)
