@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import os
+import json
 
 app = Flask(__name__)
 
@@ -11,6 +12,18 @@ def draft_email():
     tone = data.get('tone')
     email_content = f"Drafting email for bank: {bank} with tone: {tone}"
     return jsonify({"emailDraft": email_content, "status": "success"})
+
+@app.route('/load-bank-contacts', methods=['POST'])
+def load_bank_contacts():
+    data = request.get_json()
+    file_path = data.get('filePath')
+    # Assuming the file is stored on the server
+    if os.path.exists(file_path):
+        with open(file_path, 'r') as file:
+            contacts = json.load(file)
+        return jsonify({"status": "success", "contacts": contacts})
+    else:
+        return jsonify({"status": "error", "message": "File not found"}), 404
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
