@@ -1,0 +1,14 @@
+{
+  "name": "business-funding-email-draft",
+  "description": "A GPT designed to draft introduction emails to bank managers for business funding applications.",
+  "scripts": {
+    "postdeploy": "python manage.py migrate"
+  },
+  "env": {
+    "SECRET_KEY": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "value": "your-secret-key"
+    }
+  },
+  "addons": ["heroku-postgresql"]
+}
